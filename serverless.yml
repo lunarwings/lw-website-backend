@@ -1,0 +1,28 @@
+service: lw-website
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: eu-central-1
+  stage: prod
+  iamRoleStatements:
+   - Effect: 'Allow'
+     Action:
+       - 'ses:SendEmail'
+     Resource: "*"
+
+functions:
+  sendMail:
+    handler: handler.send_mail
+    description: Send email using SES service.
+    memorySize: 1024
+    timeout: 5
+    events:
+      - http:
+          path: send_mail
+          method: post
+          integration: lambda
+          cors: true
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
