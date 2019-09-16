@@ -18,7 +18,7 @@ def send_mail(event, context):
 
     try:
         response = client.send_email(
-            Destination={"ToAddresses": ["p.karkut@lunarwings.dev"]},
+            Destination={"ToAddresses": ["contact@lunarwings.dev"]},
             Message={
                 "Body": {"Text": {"Charset": "utf8", "Data": TEMPLATE.format(**data)}},
                 "Subject": {"Charset": "utf8", "Data": data["subject"]},
